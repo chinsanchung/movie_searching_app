@@ -1,17 +1,10 @@
 import React from "react";
-import { ContainerHome, PosterDiv } from "../style/styledComponents";
+import { ContainerHome, ListUl, PosterDiv } from "../style/styledComponents";
 import Header from "./Header";
 import { Link } from "react-router-dom";
-import styled from "styled-components";
-
-const ListUl = styled.ul`
-    display: flex;
-    flex-wrap: wrap;
-    padding: 30px;
-`;
 
 function MovieList({ movieData }) {
-    const posterSize = {
+    const posterStyle = {
         width: 170,
         height: 220,
         margin: 15
@@ -30,7 +23,7 @@ function MovieList({ movieData }) {
                                 <PosterDiv
                                     url={data.Poster}
                                     style={{
-                                        ...posterSize,
+                                        ...posterStyle,
                                         background: "rgb(205, 205, 205)"
                                     }}
                                     aria-labelledby={data.Title}
@@ -39,7 +32,7 @@ function MovieList({ movieData }) {
                             ) : (
                                 <PosterDiv
                                     url={data.Poster}
-                                    style={posterSize}
+                                    style={posterStyle}
                                     aria-labelledby={data.Title}
                                     role="listitem"
                                 />
