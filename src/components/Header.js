@@ -12,9 +12,11 @@ const SectionHeader = styled.div`
     font-size: 1.7em;
     font-weight: 600;
     padding: 20px;
-    margin-bottom: 20px;
     box-sizing: border-box;
     border-bottom: 1px solid #e5e5e5;
+    background-color: rgb(51, 51, 51);
+    border-top-left-radius: 5px;
+    border-top-right-radius: 5px;
     .header-title {
         margin-right: 10px;
     }
@@ -47,13 +49,15 @@ function Header() {
         const changedVal = value.split(" ").join("+");
 
         console.log(changedVal);
-        window.location.href = window.location.href + "search/" + changedVal;
+        window.location.href = "http://localhost:3000/search/" + changedVal;
         setValue("");
     };
     return (
         <SectionHeader>
             <div className="header-title">
-                <Link to="/">Searching Movie</Link>
+                <Link to="/">
+                    <span style={{ color: "#fff" }}>Searching Movie</span>
+                </Link>
             </div>
             <Form onSubmit={onSubmit}>
                 <div>
