@@ -3,6 +3,7 @@ import reducerUtils from "../lib/movie_util";
 
 const GET_LIST = "GET_LIST";
 const GET_LIST_SUCCESS = "GET_LIST_SUCCESS";
+const GET_LIST_ERROR = "GET_LIST_ERROR";
 const GET_DATA = "GET_DATA";
 const GET_DATA_SUCCESS = "GET_DATA_SUCCESS";
 
@@ -20,10 +21,12 @@ export const getMovieListThunk = keywords => async dispatch => {
                 });
             } else {
                 console.log("no result");
+                dispatch({ type: GET_LIST_ERROR });
             }
         })
         .catch(error => {
             console.log(error);
+            dispatch({ type: GET_LIST_ERROR });
         });
 };
 
@@ -57,6 +60,11 @@ const movieReducer = (state = initialState, action) => {
             return {
                 ...state,
                 list: reducerUtils.success(action.payload)
+            };
+        case GET_LIST_ERROR:
+            return {
+                ...state,
+                list: reducerUtils.error(action.payload)
             };
         case GET_DATA:
             return {
