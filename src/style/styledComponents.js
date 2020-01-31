@@ -2,8 +2,8 @@ import styled, { css } from "styled-components";
 
 export const ContainerHome = styled.div`
     position: relative;
-    max-width: 1200px;
-    margin: 10px auto;
+    max-width: 1100px;
+    margin: 0 auto;
     text-align: center;
 `;
 
@@ -21,6 +21,16 @@ export const SectionHeader = styled.div`
     .header-title {
         margin-right: 10px;
     }
+`;
+
+export const ListUl = styled.ul`
+    width: auto;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+    padding-top: 10px;
+    padding-left: 10px;
+    box-sizing: border-box;
 `;
 
 export const PosterDiv = styled.div`
