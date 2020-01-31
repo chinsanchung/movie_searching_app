@@ -6,8 +6,8 @@ function RottenTomatoes() {
         <svg
             id="svg3390"
             xmlns="http://www.w3.org/2000/svg"
-            width="16"
-            height="16"
+            width="20"
+            height="20"
             viewBox="0 0 138.75 141.25"
             version="1.1"
         >
