@@ -1,5 +1,3 @@
-// PROBLEM: 왜 로딩바가 안나올까
-
 import React from "react";
 import styled, { keyframes } from "styled-components";
 
@@ -17,8 +15,8 @@ const Loader = styled.div`
     animation: ${spin} 1.5s linear infinite;
 `;
 
-function Loading() {
+function LoadingSpinner() {
     return <Loader />;
 }
 
-export default Loading;
+export default LoadingSpinner;
