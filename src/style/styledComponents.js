@@ -27,9 +27,9 @@ export const ListUl = styled.ul`
     width: auto;
     display: flex;
     flex-wrap: wrap;
-    justify-content: space-around;
+    /* justify-content: space-around; */
     padding-top: 10px;
-    padding-left: 10px;
+    padding-left: 50px;
     box-sizing: border-box;
 `;
 
