@@ -1,9 +1,10 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import Header from "./Header";
 import { ContainerHome, PosterDiv } from "../style/styledComponents";
 import styled from "styled-components";
 import RottenTomatoes from "../assets/RottenTomatoes";
 import ImdbLogo from "../assets/ImdbLogo";
+import LoadingSpinner from "../layout/LoadingSpinner";
 
 const SectionPage = styled.div`
     display: flex;
@@ -72,7 +73,7 @@ const PageRight = styled.div`
     }
 `;
 
-function MoviePage(props) {
+function MoviePage({ data }) {
     const {
         Title,
         Year,
@@ -90,7 +91,8 @@ function MoviePage(props) {
         imdbRating,
         imdbVotes,
         imdbID
-    } = props.data;
+    } = data;
+    const [spinner, setSpinner] = useState(false);
 
     // Metascore, Rotten Tomatoes 링크 연결을 위해 타이틀 변경
     const metaTitle = Title.toLowerCase()
@@ -100,132 +102,148 @@ function MoviePage(props) {
         .split(" ")
         .join("_");
 
+    useEffect(() => {
+        setSpinner(spinner => !spinner);
+        setTimeout(() => setSpinner(spinner => !spinner), 1200);
+    }, []);
+
     return (
         <>
-            <ContainerHome>
-                <Header />
-                <SectionPage>
-                    <div>
-                        <PosterDiv
-                            url={Poster}
-                            style={posterSize}
-                            role="movie-poster"
-                            aria-labelledby={Title}
-                        />
-                    </div>
-                    <PageRight>
-                        <div className="page__title">
-                            {Title}&nbsp;
-                            <span
-                                style={{
-                                    fontSize: 17,
-                                    color: "rgba(0, 0, 0, .5)"
-                                }}
-                            >
-                                ({Year})
-                            </span>
+            {spinner ? (
+                <LoadingSpinner />
+            ) : (
+                <ContainerHome>
+                    <Header />
+                    <SectionPage>
+                        <div>
+                            <PosterDiv
+                                url={Poster}
+                                style={posterSize}
+                                role="movie-poster"
+                                aria-labelledby={Title}
+                            />
                         </div>
-                        <div className="page__ul detail">
-                            <div className="ul--li">{Genre}</div>
-                            <div className="ul--li">{Runtime}</div>
-                            <div
-                                className="ul--li"
-                                style={{ borderRight: "none" }}
-                            >
-                                {Rated}
-                            </div>
-                        </div>
-                        <div className="page__ul plot">
-                            <p className="page--subtitle">Plot</p>
-                            <p>{Plot}</p>
-                        </div>
-                        <div className="page__ul production">
-                            <p className="page--subtitle">Production crew</p>
-                            <div className="page--description">
-                                Director:&nbsp;
-                                <span style={{ color: "#000000" }}>
-                                    {Director}
+                        <PageRight>
+                            <div className="page__title">
+                                {Title}&nbsp;
+                                <span
+                                    style={{
+                                        fontSize: 17,
+                                        color: "rgba(0, 0, 0, .5)"
+                                    }}
+                                >
+                                    ({Year})
                                 </span>
                             </div>
+                            <div className="page__ul detail">
+                                <div className="ul--li">{Genre}</div>
+                                <div className="ul--li">{Runtime}</div>
+                                <div
+                                    className="ul--li"
+                                    style={{ borderRight: "none" }}
+                                >
+                                    {Rated}
+                                </div>
+                            </div>
+                            <div className="page__ul plot">
+                                <p className="page--subtitle">Plot</p>
+                                <p>{Plot}</p>
+                            </div>
+                            <div className="page__ul production">
+                                <p className="page--subtitle">
+                                    Production crew
+                                </p>
+                                <div className="page--description">
+                                    Director:&nbsp;
+                                    <span style={{ color: "#000000" }}>
+                                        {Director}
+                                    </span>
+                                </div>
 
-                            <div className="page--description">
-                                Writer:&nbsp;
-                                <span style={{ color: "#000000" }}>
-                                    {Writer}
-                                </span>
+                                <div className="page--description">
+                                    Writer:&nbsp;
+                                    <span style={{ color: "#000000" }}>
+                                        {Writer}
+                                    </span>
+                                </div>
                             </div>
-                        </div>
-                        <div className="page__ul casting">
-                            <p className="page--subtitle">Starring</p>
-                            <span>{Actors}</span>
-                        </div>
-                        <div className="page__ul">
-                            <div>
-                                <p className="page--subtitle">Awards</p>
-                                <span>{Awards}</span>
+                            <div className="page__ul casting">
+                                <p className="page--subtitle">Starring</p>
+                                <span>{Actors}</span>
                             </div>
-                        </div>
-                        <div className="page__ul score">
-                            <div className="ul--li score-li">
-                                {/* 참고: https://www.thesitewizard.com/html-tutorial/open-links-in-new-window-or-tab.shtml */}
-                                <a
-                                    href={`https://www.rottentomatoes.com/m/${rottenTitle}`}
-                                    target="_blank"
-                                    rel="noopener noreferrer"
-                                >
-                                    <RottenTomatoes />
-                                    &nbsp;
-                                    {Ratings.length > 1 &&
-                                    Ratings[1].Value !== "N/A"
-                                        ? Ratings[1].Value
-                                        : "N/A"}
-                                </a>
+                            <div className="page__ul">
+                                <div>
+                                    <p className="page--subtitle">Awards</p>
+                                    <span>{Awards}</span>
+                                </div>
                             </div>
-                            <div className="ul--li score-li">
-                                <a
-                                    href={`https://www.metacritic.com/movie/${metaTitle}`}
-                                    target="_blank"
-                                    rel="noopener noreferrer"
-                                >
-                                    <img
-                                        width="50"
-                                        height="15"
-                                        alt="Metacritic logo"
-                                        src="http://bitly.kr/aWJIimdV"
-                                    />
-                                    &nbsp;
-                                    <div className="meta-score">
-                                        {Metascore !== "N/A"
-                                            ? Metascore
+                            <div className="page__ul score">
+                                <div className="ul--li score-li">
+                                    {/* 참고: https://www.thesitewizard.com/html-tutorial/open-links-in-new-window-or-tab.shtml */}
+                                    <a
+                                        href={`https://www.rottentomatoes.com/m/${rottenTitle}`}
+                                        target="_blank"
+                                        rel="noopener noreferrer"
+                                    >
+                                        <RottenTomatoes />
+                                        &nbsp;
+                                        {Ratings.length > 1 &&
+                                        Ratings[1].Value !== "N/A"
+                                            ? Ratings[1].Value
                                             : "N/A"}
-                                    </div>
-                                </a>
-                            </div>
-                            <div
-                                className="ul--li score-li"
-                                style={{ marginRight: 1, borderRight: "none" }}
-                            >
-                                <a
-                                    href={`https://www.imdb.com/title/${imdbID}`}
-                                    target="_blank"
-                                    rel="noopener noreferrer"
+                                    </a>
+                                </div>
+                                <div className="ul--li score-li">
+                                    <a
+                                        href={`https://www.metacritic.com/movie/${metaTitle}`}
+                                        target="_blank"
+                                        rel="noopener noreferrer"
+                                    >
+                                        <img
+                                            width="50"
+                                            height="15"
+                                            alt="Metacritic logo"
+                                            src="http://bitly.kr/aWJIimdV"
+                                        />
+                                        &nbsp;
+                                        <div className="meta-score">
+                                            {Metascore !== "N/A"
+                                                ? Metascore
+                                                : "N/A"}
+                                        </div>
+                                    </a>
+                                </div>
+                                <div
+                                    className="ul--li score-li"
+                                    style={{
+                                        marginRight: 1,
+                                        borderRight: "none"
+                                    }}
                                 >
-                                    <ImdbLogo />
-                                    &nbsp;
-                                    {imdbRating !== "N/A" ? imdbRating : "N/A"}
-                                </a>
+                                    <a
+                                        href={`https://www.imdb.com/title/${imdbID}`}
+                                        target="_blank"
+                                        rel="noopener noreferrer"
+                                    >
+                                        <ImdbLogo />
+                                        &nbsp;
+                                        {imdbRating !== "N/A"
+                                            ? imdbRating
+                                            : "N/A"}
+                                    </a>
+                                </div>
+                                <div
+                                    className="ul--li"
+                                    style={{ borderRight: "none" }}
+                                >
+                                    ({imdbVotes !== "N/A" ? imdbVotes : "N/A"}
+                                    voted)
+                                </div>
                             </div>
-                            <div
-                                className="ul--li"
-                                style={{ borderRight: "none" }}
-                            >
-                                ({imdbVotes !== "N/A" ? imdbVotes : "N/A"}
-                                voted)
-                            </div>
-                        </div>
-                    </PageRight>
-                </SectionPage>
-            </ContainerHome>
+                        </PageRight>
+                    </SectionPage>
+                </ContainerHome>
+            )}
         </>
     );
 }
