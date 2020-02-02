@@ -51,3 +51,11 @@
 1. 02/02
 
 -   README.md 업데이트
+-   Loading -> LoadingSpinner 로 이름 변경
+-   MovieList, MoviePage 에서 LoadingSpinner 가 뜨도록 `useEffect`, `setTimeout`으로 출력을 설정
+
+## 문제
+
+1. 입력한 키워드로 결과가 나오지 않을 때, ErrorPage 는 정상적으로 출력되지만, 아래의 메시지가 나옴
+
+> Warning: Can't perform a React state update on an unmounted component. This is a no-op, but it indicates a memory leak in your application. To fix, cancel all subscriptions and asynchronous tasks in a useEffect cleanup function. in MovieList (at MovieListContainer.js:20)
