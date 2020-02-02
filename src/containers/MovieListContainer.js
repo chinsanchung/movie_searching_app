@@ -2,7 +2,6 @@ import React, { useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { getMovieListThunk } from "../modules/movie";
 import MovieList from "../components/MovieList";
-import Loading from "../layout/Loading";
 import ErrorPage from "../layout/ErrorPage";
 
 function MovieListContainer({ match }) {
@@ -12,13 +11,12 @@ function MovieListContainer({ match }) {
     );
     const dispatch = useDispatch();
     useEffect(() => {
-        console.log(keywords);
         dispatch(getMovieListThunk(keywords));
     }, [keywords, dispatch]);
 
     if (!data && error) return <ErrorPage />;
-    if (loading && !data) return <Loading />;
+    if (loading && !data) return null;
 
-    return <MovieList movieData={data} />;
+    return <MovieList data={data} />;
 }
 export default MovieListContainer;
