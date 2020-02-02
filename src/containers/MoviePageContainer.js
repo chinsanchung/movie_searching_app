@@ -16,7 +16,7 @@ function MoviePageContainer({ match }) {
     }, [dispatch, imdbID]);
 
     if (loading && !data) return <Loading />;
-    // 에러 해결: 비동기 처리라서 data 에 값이 없을 때는 props 로 가지 않도록 만들어야 했음
+    // 해결: 비동기 처리라서 data 에 값이 없을 때는 props 로 가지 않도록 만들어야 했음
     if (!data) return null;
     if (error) return null;
     return <MoviePage data={data} />;
