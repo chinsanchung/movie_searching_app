@@ -7,8 +7,8 @@ const GET_LIST_ERROR = "GET_LIST_ERROR";
 const GET_DATA = "GET_DATA";
 const GET_DATA_SUCCESS = "GET_DATA_SUCCESS";
 
-export const getMovieListThunk = keywords => async dispatch => {
-    await getMovieList(keywords)
+export const getMovieListThunk = keywords => dispatch => {
+    getMovieList(keywords)
         .then(response => {
             dispatch({
                 type: GET_LIST,
@@ -30,8 +30,8 @@ export const getMovieListThunk = keywords => async dispatch => {
         });
 };
 
-export const getMovieDataThunk = imdbID => async dispatch => {
-    await getMovieData(imdbID).then(response => {
+export const getMovieDataThunk = imdbID => dispatch => {
+    getMovieData(imdbID).then(response => {
         dispatch({ type: GET_DATA, id: imdbID });
         if (response.data.Response === "True") {
             dispatch({
