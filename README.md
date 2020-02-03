@@ -48,11 +48,15 @@
 -   그동안 진행했던 사항들 전부 업데이트
     -   API 가져오기, 리덕스 연결, 컴포넌트와 컨테이너 분리, CSS 디자인
 
-1. 02/02
+2. 02/02
 
 -   README.md 업데이트
 -   Loading -> LoadingSpinner 로 이름 변경
 -   MovieList, MoviePage 에서 LoadingSpinner 가 뜨도록 `useEffect`, `setTimeout`으로 출력을 설정
+
+3. 02/03
+
+-   modules/movie.js: redux thunk 함수에서 불필요한 async/await 제거. Promise 를 리턴하는 `getMovieList`, `getMovieData`에 Promise.then 으로 비동기 처리를 하기에 async/await 를 제거했습니다.
 
 ## 문제
 
