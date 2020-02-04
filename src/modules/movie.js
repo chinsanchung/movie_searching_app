@@ -7,27 +7,19 @@ const GET_LIST_ERROR = "GET_LIST_ERROR";
 const GET_DATA = "GET_DATA";
 const GET_DATA_SUCCESS = "GET_DATA_SUCCESS";
 
-export const getMovieListThunk = keywords => dispatch => {
-    getMovieList(keywords)
-        .then(response => {
-            dispatch({
-                type: GET_LIST,
-                payload: response.data.Search
-            });
-            if (response.data.Response === "True") {
-                dispatch({
-                    type: GET_LIST_SUCCESS,
-                    payload: response.data.Search
-                });
-            } else {
-                console.log("no result");
-                dispatch({ type: GET_LIST_ERROR });
-            }
-        })
-        .catch(error => {
-            console.log(error);
+export const getMovieListThunk = keywords => async dispatch => {
+    try {
+        const response = await getMovieList(keywords);
+        dispatch({ type: GET_LIST, payload: response.Search });
+        if (response.Response === "True") {
+            dispatch({ type: GET_LIST_SUCCESS, payload: response.Search });
+        } else {
             dispatch({ type: GET_LIST_ERROR });
-        });
+        }
+    } catch (error) {
+        console.log(error);
+        dispatch({ type: GET_LIST_ERROR });
+    }
 };
 
 export const getMovieDataThunk = imdbID => dispatch => {
