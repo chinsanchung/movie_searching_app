@@ -1,15 +1,19 @@
-// PROBLEM: api 따로 분리해서 thunk 를 하려 했지만, 비동기 처리가 제대로 되질 않음. 원인을 모름
-// => try catch 문에 return axios.get 만 치고, 함수를 부른 곳에서 Promise 를 사용. 또는 async/await
-// 출처: https://tuhbm.github.io/2019/03/21/axios/
 import axios from "axios";
 
 export const getMovieList = async keywords => {
+    const URL = `https://www.omdbapi.com/?y=2019&apikey=64bee5dd&s=${keywords}`;
+    let source = axios.CancelToken.source();
     try {
-        return await axios.get(
-            `https://www.omdbapi.com/?y=2019&apikey=64bee5dd&s=${keywords}`
-        );
+        const response = await axios.get(URL, { cancelToken: source.token });
+        if (response.data.Response === "True") {
+            return response.data;
+        } else {
+            source.cancel();
+            return response.data.Response;
+        }
     } catch (error) {
         console.log(error);
+        source.cancel();
     }
 };
 
@@ -22,6 +26,3 @@ export const getMovieData = async imdbID => {
         console.log(error);
     }
 };
-
-// http://www.omdbapi.com/?apikey=64bee5dd&t=knives+out
-// http://www.omdbapi.com/?apikey=64bee5dd&i=tt8946378
