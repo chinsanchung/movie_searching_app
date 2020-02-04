@@ -16,13 +16,18 @@ function HomeLayout() {
     const [loading, setLoading] = useState(true);
 
     useEffect(() => {
-        getMovieList("out").then(response => {
-            setList(list => list.concat(response.data.Search));
-        });
-        getMovieList("man").then(response => {
-            setList(list => list.concat(response.data.Search));
-            setLoading(false);
-        });
+        const getList = async () => {
+            try {
+                const res_one = await getMovieList("out");
+                setList(list => list.concat(res_one.Search));
+                const res_two = await getMovieList("man");
+                setList(list => list.concat(res_two.Search));
+                setLoading(false);
+            } catch (err) {
+                console.log(err);
+            }
+        };
+        getList();
     }, []);
 
     if (loading && !list) return <div>LOADING</div>;
