@@ -58,8 +58,18 @@
 
 -   modules/movie.js: redux thunk 함수에서 불필요한 async/await 제거. Promise 를 리턴하는 `getMovieList`, `getMovieData`에 Promise.then 으로 비동기 처리를 하기에 async/await 를 제거했습니다.
 
+4. 02/04
+
+-   api/index.js-`getMovieList()`, modules/movie.js-`getMovieListThunk()`, layout/HomeLayout.js: 아래의 키워드 오류를 해결하기 위해 Axios 의 CancelToken 을 api 에서 사용했고, 달라지는 리턴 값으로 인해 thunk 함수와 HomeLayout 컴포넌트를 바꿨습니다.
+
 ## 문제
 
-1. 입력한 키워드로 결과가 나오지 않을 때, ErrorPage 는 정상적으로 출력되지만, 아래의 메시지가 나옴
+1. 입력한 키워드로 결과가 나오지 않을 때, ErrorPage 는 정상적으로 출력되지만, 아래의 메시지가 나옵니다.
 
 > Warning: Can't perform a React state update on an unmounted component. This is a no-op, but it indicates a memory leak in your application. To fix, cancel all subscriptions and asynchronous tasks in a useEffect cleanup function. in MovieList (at MovieListContainer.js:20)
+
+[Axios github](https://github.com/axios/axios#cancellation)에 Cancellation 에 대한 설명이 있지만, OMDb API 는 요청을 제대로 받은 다음 `{"Response":"False","Error":"Movie not found!"}` 이란 데이터를 보내 catch 로 에러를 처리하기가 어렵습니다.
+
+-   02/04
+
+Axios 에서 지원하는 CancelToken 으로 api/index.js 를 수정했지만 동일한 에러 메시지가 나왔습니다.
