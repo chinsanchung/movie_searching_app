@@ -237,7 +237,7 @@ function MoviePage({ data }) {
                                     style={{ borderRight: "none" }}
                                 >
                                     ({imdbVotes !== "N/A" ? imdbVotes : "N/A"}
-                                    voted)
+                                    &nbsp;voted)
                                 </div>
                             </div>
                         </PageRight>

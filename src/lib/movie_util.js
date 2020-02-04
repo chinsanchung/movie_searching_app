@@ -14,8 +14,8 @@ const reducerUtils = {
         loading: false,
         error: false
     }),
-    error: (prevState = null) => ({
-        data: prevState,
+    error: () => ({
+        data: null,
         loading: false,
         error: true
     })
