@@ -62,6 +62,22 @@
 
 -   api/index.js-`getMovieList()`, modules/movie.js-`getMovieListThunk()`, layout/HomeLayout.js: 아래의 키워드 오류를 해결하기 위해 Axios 의 CancelToken 을 api 에서 사용했고, 달라지는 리턴 값으로 인해 thunk 함수와 HomeLayout 컴포넌트를 바꿨습니다.
 
+5. 02/06
+
+-   style/styledComponents.js: PosterDiv 컴포넌트에 width, height 값을 prop 으로 받아오도록 변경했습니다.
+-   components/MovieList.js:
+    1. PosterDiv 의 변경으로, 포스터 스타일 객체를 삭제하고 width, height 값을 넣었습니다.
+    2. Poster 의 삼항연산자(URL 이 N/A 인지 여부를 확인함)를 삭제했습니다. (PosterDiv 가 이미 수행하고 있어서입니다.)
+-   components/MoviePage.js:
+    1. PosterDiv 의 변경으로, 포스터 스타일 객체를 삭제하고 width, height 값을 넣었습니다.
+    2. page-subtitle 클래스 div 의 스타일을 변경하고, 문자를 수정했습니다.
+-   api/index.js:
+    1. Axios.get 에 필요한 URL 을 상수로 따로 선언해 가독성을 높였습니다.
+-   layout/HomeLayout.js:
+    1. 포스터 스타일 객체를 삭제, width 와 height 값을 넣었습니다.
+    2. shuffle 함수를 넣어 초기 리스트 배열을 섞고, 상태 `list`에 넣는 작업을 수행하도록 작성했습니다.
+    3. Poster 의 삼항연산자(URL 이 N/A 인지 여부를 확인함)를 삭제했습니다.
+
 ## 문제
 
 1. 입력한 키워드로 결과가 나오지 않을 때, ErrorPage 는 정상적으로 출력되지만, 아래의 메시지가 나옵니다.
