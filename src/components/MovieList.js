@@ -5,11 +5,6 @@ import { Link } from "react-router-dom";
 import LoadingSpinner from "../layout/LoadingSpinner";
 
 function MovieList({ data }) {
-    const posterStyle = {
-        width: 170,
-        height: 220,
-        margin: 15
-    };
     const [spinner, setSpinner] = useState(false);
     useEffect(() => {
         setSpinner(spinner => !spinner);
@@ -31,24 +26,13 @@ function MovieList({ data }) {
                         {data.map(data => (
                             <li key={data.imdbID}>
                                 <Link to={`/movie/${data.imdbID}`}>
-                                    {data.Poster === "N/A" ? (
-                                        <PosterDiv
-                                            url={data.Poster}
-                                            style={{
-                                                ...posterStyle,
-                                                background: "rgb(205, 205, 205)"
-                                            }}
-                                            aria-labelledby={data.Title}
-                                            role="listitem"
-                                        />
-                                    ) : (
-                                        <PosterDiv
-                                            url={data.Poster}
-                                            style={posterStyle}
-                                            aria-labelledby={data.Title}
-                                            role="listitem"
-                                        />
-                                    )}
+                                    <PosterDiv
+                                        url={data.Poster}
+                                        width="170px"
+                                        height="220px"
+                                        aria-labelledby={data.Title}
+                                        role="listitem"
+                                    />
                                 </Link>
                             </li>
                         ))}
