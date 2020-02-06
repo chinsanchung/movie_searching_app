@@ -27,7 +27,6 @@ export const ListUl = styled.ul`
     width: auto;
     display: flex;
     flex-wrap: wrap;
-    /* justify-content: space-around; */
     padding-top: 10px;
     padding-left: 50px;
     box-sizing: border-box;
@@ -35,6 +34,9 @@ export const ListUl = styled.ul`
 
 export const PosterDiv = styled.div`
     display: flex;
+    width: ${props => props.width};
+    height: ${props => props.height};
+    margin: 15px;
     justify-content: center;
     align-items: center;
     box-sizing: border-box;
@@ -47,11 +49,11 @@ export const PosterDiv = styled.div`
                   background-size: contain;
               `
             : css`
-                  background-color: #ffffff;
+                  background-color: rgb(205, 205, 205);
                   &::after {
                       content: "N/A";
                       text-decoration: none;
-                      color: black;
+                      color: #000000;
                   }
               `}
 `;
