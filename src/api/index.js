@@ -1,10 +1,12 @@
 import axios from "axios";
 
 export const getMovieList = async keywords => {
-    const URL = `https://www.omdbapi.com/?y=2019&apikey=64bee5dd&s=${keywords}`;
+    const LIST_URL = `https://www.omdbapi.com/?apikey=64bee5dd&s=${keywords}`;
     let source = axios.CancelToken.source();
     try {
-        const response = await axios.get(URL, { cancelToken: source.token });
+        const response = await axios.get(LIST_URL, {
+            cancelToken: source.token
+        });
         if (response.data.Response === "True") {
             return response.data;
         } else {
@@ -18,10 +20,9 @@ export const getMovieList = async keywords => {
 };
 
 export const getMovieData = async imdbID => {
+    const URL = `http://www.omdbapi.com/?apikey=64bee5dd&i=${imdbID}`;
     try {
-        return await axios.get(
-            `http://www.omdbapi.com/?apikey=64bee5dd&i=${imdbID}`
-        );
+        return await axios.get(URL);
     } catch (error) {
         console.log(error);
     }
