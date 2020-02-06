@@ -13,17 +13,13 @@ const SectionPage = styled.div`
     background: #e2e2e2;
     line-height: 1.25;
 `;
-const posterSize = {
-    width: 350,
-    height: 450
-};
 const PageRight = styled.div`
     width: 690px;
     background: #d5d5d5;
     padding: 0 15px 15px 15px;
     box-sizing: border-box;
     border-radius: 5px;
-    margin-left: 5px;
+    margin-left: 45px;
     text-align: left;
 
     .page__title {
@@ -50,7 +46,9 @@ const PageRight = styled.div`
         font-size: 12px;
     }
     .page--subtitle {
-        font-size: 18px;
+        display: inline-block;
+        margin-right: 10px;
+        font-size: 17px;
         font-weight: 600;
         margin-bottom: 10px;
     }
@@ -118,7 +116,8 @@ function MoviePage({ data }) {
                         <div>
                             <PosterDiv
                                 url={Poster}
-                                style={posterSize}
+                                width="310px"
+                                height="450px"
                                 role="movie-poster"
                                 aria-labelledby={Title}
                             />
@@ -146,12 +145,12 @@ function MoviePage({ data }) {
                                 </div>
                             </div>
                             <div className="page__ul plot">
-                                <p className="page--subtitle">Plot</p>
+                                <p className="page--subtitle">PLOT</p>
                                 <p>{Plot}</p>
                             </div>
                             <div className="page__ul production">
                                 <p className="page--subtitle">
-                                    Production crew
+                                    DIRECTOR / WRITER
                                 </p>
                                 <div className="page--description">
                                     Director:&nbsp;
@@ -168,16 +167,17 @@ function MoviePage({ data }) {
                                 </div>
                             </div>
                             <div className="page__ul casting">
-                                <p className="page--subtitle">Starring</p>
+                                <p className="page--subtitle">CAST</p>
                                 <span>{Actors}</span>
                             </div>
                             <div className="page__ul">
                                 <div>
-                                    <p className="page--subtitle">Awards</p>
+                                    <p className="page--subtitle">AWARDS</p>
                                     <span>{Awards}</span>
                                 </div>
                             </div>
                             <div className="page__ul score">
+                                <p className="page--subtitle">RATING</p>
                                 <div className="ul--li score-li">
                                     {/* 참고: https://www.thesitewizard.com/html-tutorial/open-links-in-new-window-or-tab.shtml */}
                                     <a
