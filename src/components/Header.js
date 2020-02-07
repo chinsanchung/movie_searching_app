@@ -7,19 +7,13 @@ const SectionHeader = styled.div`
     position: relative;
     display: flex;
     justify-content: space-between;
-    height: 100%;
-    align-content: center;
-    font-size: 1.7em;
-    font-weight: 600;
-    padding: 20px;
+    align-items: center;
+    padding: 15px;
     box-sizing: border-box;
     border-bottom: 1px solid #e5e5e5;
-    background-color: rgb(51, 51, 51);
+    background-color: rgba(12, 21, 29, 0.8);
     border-top-left-radius: 5px;
     border-top-right-radius: 5px;
-    .header-title {
-        margin-right: 10px;
-    }
 `;
 
 const Form = styled.form`
@@ -52,13 +46,28 @@ function Header() {
         window.location.href = "http://localhost:3000/search/" + changedVal;
         setValue("");
     };
+
     return (
         <SectionHeader>
-            <div className="header-title">
-                <Link to="/">
-                    <span style={{ color: "#fff" }}>Searching Movie</span>
+            <div className="menu-group">
+                <Link to="/" className="header-title">
+                    <span style={{ color: "#fff" }}>MovSearch</span>
                 </Link>
+                <ul className="main-menu toggle">
+                    <li>
+                        <Link to="/">
+                            <span>Home</span>
+                        </Link>
+                    </li>
+                    <li>
+                        <Link to="/">
+                            <span>Watchlist</span>
+                        </Link>
+                    </li>
+                </ul>
             </div>
+
+            <div></div>
             <Form onSubmit={onSubmit}>
                 <div>
                     <MdSearch style={searchIcon} />
