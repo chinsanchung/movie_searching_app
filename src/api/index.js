@@ -1,5 +1,7 @@
 import axios from "axios";
 
+export const WATCH_LIST = "http://localhost:4000/watchList";
+
 export const getMovieList = async keywords => {
     const LIST_URL = `https://www.omdbapi.com/?apikey=64bee5dd&s=${keywords}`;
     let source = axios.CancelToken.source();
