@@ -7,28 +7,12 @@ export const ContainerHome = styled.div`
     text-align: center;
 `;
 
-export const SectionHeader = styled.div`
-    position: relative;
-    display: flex;
-    justify-content: space-between;
-    height: 100%;
-    align-content: center;
-    font-size: 1.7em;
-    font-weight: 600;
-    padding: 20px;
-    box-sizing: border-box;
-    border-bottom: 1px solid #e5e5e5;
-    .header-title {
-        margin-right: 10px;
-    }
-`;
-
 export const ListUl = styled.ul`
-    width: auto;
+    max-width: 1000px;
     display: flex;
+    margin: 0 auto;
     flex-wrap: wrap;
     padding-top: 10px;
-    padding-left: 50px;
     box-sizing: border-box;
 `;
 
@@ -43,9 +27,9 @@ export const PosterDiv = styled.div`
     font-size: 30px;
     font-weight: 600;
     ${props =>
-        props.url !== "N/A"
+        props.poster !== "N/A"
             ? css`
-                  background: no-repeat url(${props.url});
+                  background: no-repeat url(${props.poster});
                   background-size: contain;
               `
             : css`
