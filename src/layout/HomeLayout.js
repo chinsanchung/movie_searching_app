@@ -1,10 +1,6 @@
 import React, { useEffect, useState } from "react";
-import styled from "styled-components";
-import { ListUl, PosterDiv } from "../style/styledComponents";
-import { Link } from "react-router-dom";
 import { getMovieList } from "../api";
-
-const LayoutStyledComponent = styled.div``;
+import ListLayout from "./ListLayout";
 
 function HomeLayout() {
     const [list, setList] = useState([]);
@@ -40,23 +36,9 @@ function HomeLayout() {
     if (!list) return null;
 
     return (
-        <LayoutStyledComponent>
-            <ListUl>
-                {list.map(item => (
-                    <li key={item.imdbID}>
-                        <Link to={`/movie/${item.imdbID}`}>
-                            <PosterDiv
-                                url={item.Poster}
-                                width="170px"
-                                height="220px"
-                                aria-labelledby={item.Title}
-                                role="listitem"
-                            />
-                        </Link>
-                    </li>
-                ))}
-            </ListUl>
-        </LayoutStyledComponent>
+        <>
+            <ListLayout data={list} />
+        </>
     );
 }
 
