@@ -1,10 +1,11 @@
 import React, { useState, useEffect } from "react";
 import Header from "./Header";
-import { ContainerHome, PosterDiv } from "../style/styledComponents";
+import { ContainerHome } from "../style/styledComponents";
 import styled from "styled-components";
 import RottenTomatoes from "../assets/RottenTomatoes";
 import ImdbLogo from "../assets/ImdbLogo";
 import LoadingSpinner from "../layout/LoadingSpinner";
+import Poster from "./Poster";
 
 const SectionPage = styled.div`
     display: flex;
@@ -83,7 +84,6 @@ function MoviePage({ data }) {
         Actors,
         Plot,
         Awards,
-        Poster,
         Ratings,
         Metascore,
         imdbRating,
@@ -114,12 +114,14 @@ function MoviePage({ data }) {
                     <Header />
                     <SectionPage>
                         <div>
-                            <PosterDiv
-                                url={Poster}
+                            <Poster
+                                poster={data.Poster}
+                                title={Title}
+                                id={imdbID}
                                 width="310px"
                                 height="450px"
-                                role="movie-poster"
                                 aria-labelledby={Title}
+                                role="movie-poster"
                             />
                         </div>
                         <PageRight>
