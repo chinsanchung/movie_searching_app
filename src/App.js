@@ -13,7 +13,7 @@ function App() {
             <Route path="/" exact component={Home} />
             <Route path="/search/:keywords" component={MovieListContainer} />
             <Route path="/movie/:imdbID" component={MoviePage} />
-            <Route path="/wishList" component={WatchList} />
+            <Route path="/watchlist" component={WatchList} />
         </>
     );
 }

@@ -60,7 +60,7 @@ function Header() {
                         </Link>
                     </li>
                     <li>
-                        <Link to="/">
+                        <Link to="/watchlist">
                             <span>Watchlist</span>
                         </Link>
                     </li>
