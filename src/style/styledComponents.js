@@ -8,15 +8,16 @@ export const ContainerHome = styled.div`
 `;
 
 export const ListUl = styled.ul`
-    max-width: 1000px;
+    position: relative;
     display: flex;
+    max-width: 1000px;
     margin: 0 auto;
     flex-wrap: wrap;
     padding-top: 10px;
     box-sizing: border-box;
 `;
 
-export const PosterDiv = styled.div`
+export const Poster = styled.div`
     display: flex;
     width: ${props => props.width};
     height: ${props => props.height};
