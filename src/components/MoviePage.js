@@ -1,11 +1,11 @@
 import React, { useState, useEffect } from "react";
 import Header from "./Header";
-import { ContainerHome } from "../style/styledComponents";
+import { ContainerHome, Poster } from "../style/styledComponents";
 import styled from "styled-components";
 import RottenTomatoes from "../assets/RottenTomatoes";
 import ImdbLogo from "../assets/ImdbLogo";
 import LoadingSpinner from "../layout/LoadingSpinner";
-import Poster from "./Poster";
+import Bookmark from "./Bookmark";
 
 const SectionPage = styled.div`
     display: flex;
@@ -113,11 +113,14 @@ function MoviePage({ data }) {
                 <ContainerHome>
                     <Header />
                     <SectionPage>
-                        <div>
-                            <Poster
+                        <div style={{ position: "relative" }}>
+                            <Bookmark
+                                imdbID={imdbID}
                                 poster={data.Poster}
                                 title={Title}
-                                id={imdbID}
+                            />
+                            <Poster
+                                poster={data.Poster}
                                 width="310px"
                                 height="450px"
                                 aria-labelledby={Title}
