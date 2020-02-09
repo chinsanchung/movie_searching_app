@@ -1,34 +1,72 @@
 import React, { useEffect, useState } from "react";
-import axios from "axios";
+import { useSelector, useDispatch } from "react-redux";
+import styled from "styled-components";
 import { WATCH_LIST } from "../api";
 import ListLayout from "./ListLayout";
 import Header from "../components/Header";
 import { ContainerHome } from "../style/styledComponents";
+import { loadBookmark } from "../modules/bookmark";
+import image from "../assets/watchlist_image.jpg";
+import axios from "axios";
+import LoadingSpinner from "./LoadingSpinner";
+
+const EmptyLayout = styled.div`
+    margin-top: 30px;
+`;
+const DecorationImage = styled.img`
+    width: 400px;
+    margin: 15px;
+`;
 
 function WatchList() {
-    const [list, setList] = useState([]);
+    const [loading, setLoading] = useState(true);
+    const [spinner, setSpinner] = useState(false);
+    const bookmarkList = useSelector(state => state.bookmarkReducer);
+    const dispatch = useDispatch();
 
     useEffect(() => {
         const getList = async () => {
             try {
                 const response = await axios.get(WATCH_LIST);
-                setList(list => list.concat(response.data));
+                dispatch(loadBookmark(response.data));
+                setLoading(false);
             } catch (error) {
                 console.log(error);
             }
         };
-        // TODO: 리스트 출력이 안됨
         getList();
-    }, []);
 
-    if (!list) return null;
+        setSpinner(spinner => !spinner);
+        setTimeout(() => {
+            setSpinner(spinner => !spinner);
+        }, 1200);
+    }, [dispatch]);
+
+    if (loading && !bookmarkList) return <div></div>;
+
     return (
         <>
-            <ContainerHome>
-                <Header />
-                <h1>WISH LIST</h1>
-                <ListLayout data={list} />
-            </ContainerHome>
+            {spinner ? (
+                <LoadingSpinner />
+            ) : (
+                <ContainerHome>
+                    <Header />
+                    <EmptyLayout>
+                        {bookmarkList.length > 0 ? (
+                            <></>
+                        ) : (
+                            <>
+                                <DecorationImage src={image} />
+                                <h1>
+                                    Use the bookmark icon to add movies or TV
+                                    Shows to your WatchList.
+                                </h1>
+                            </>
+                        )}
+                    </EmptyLayout>
+                    <ListLayout data={bookmarkList} />
+                </ContainerHome>
+            )}
         </>
     );
 }
