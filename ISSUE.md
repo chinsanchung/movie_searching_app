@@ -46,9 +46,21 @@
 -   layout/ListLayout.js 생성: HomeLayout, MovieList 에서 동일하게 사용하는 영역을 분리했습니다.
 -   components/Poster.js: ListLayout, MoviePage 에서 사용하는포스터에 watchlist 기능을 구현하기 위해 분리했습니다. 포스터를 클릭 시 watchlist 에 추가하고 삭제하는 기능을 넣었습니다.
 
+7. 02/08
+
+-   MovieList 에러 해결: 'components/MovieListContainer.js'에서 Erropage 관련 경고 메시지를 해결했습니다.
+-   components/Poster.js 삭제: 기존의 Poster 컴포넌트를 삭제하고 `styled-components`로 교체했습니다. 그에 따라 MovieList, ListLayout, MoviePage 의 import 문을 수정했습니다.
+-   북마크 기능 추가: 북마크를 추가했습니다. 관련 리듀서 'modules/bookmark.js', 컴포넌트 'components/Bookmark.js'를 만들었습니다. 북마크를 ListLayout, MoviePage 에 추가했고, 리듀서를 이용해 Watchlist 를 비동기로 처리할 수 있도록, 'layout/WatchList.js'를 수정했습니다.
+-   layout/HomeLayout.js 삭제: 'layout/ListLayout'에서 영화 리스트에 관한 모든 것을 처리하도록 수정했습니다. 그리고 HomeLayout 컴포넌트에 있던 비동기 GET 관련 명령을 'components/Home.js'으로 옮겼습니다.
+-   WatchList 수정: 영화가 없을 때를 꾸며줄 [일러스트 이미지](https://www.freepik.com/free-vector/bundle-cinema-entertainment-set-icons_5720507.htm#position=2)를 추가했습니다.
+
+8. 02/09
+
+-   Header 의 메뉴 아이콘: Home, WatchList 의 글자 색을 페이지마다 구분할 수 있도록 만들었습니다.
+
 ## Error
 
-1. 입력한 키워드로 결과가 나오지 않을 때, ErrorPage 는 정상적으로 출력되지만, 아래의 메시지가 나옵니다.
+1. 입력한 키워드로 결과가 나오지 않을 때, ErrorPage 는 정상적으로 출력되지만, 아래의 메시지가 나옵니다. -> 해결
 
 > Warning: Can't perform a React state update on an unmounted component. This is a no-op, but it indicates a memory leak in your application. To fix, cancel all subscriptions and asynchronous tasks in a useEffect cleanup function. in MovieList (at MovieListContainer.js:20)
 
@@ -57,3 +69,22 @@
 -   02/04
 
 Axios 에서 지원하는 CancelToken 으로 api/index.js 를 수정했지만 동일한 에러 메시지가 나왔습니다.
+
+-   02/08
+
+```javascript
+//MovieListContainer.js
+// 원본
+if (!data && error) return <ErrorPage />;
+if (loading && !data) return null;
+return <MovieList data={data} />;
+
+// 수정본
+if (!data && error) return <ErrorPage />;
+if (loading && !data) return null;
+if (data && !loading) return <MovieList data={data} />;
+
+return <></>;
+```
+
+ErrorPage 가 뜰 때 오류가 났던 이유는 처음 if 문에서 모든 것이 끝났지만, 마지막의 리턴으로 인해 데이터를 계산해서 전달하고 있어서 생긴 문제라고 생각했습니다. 따라서 MovieList 에도 if 문으로 조건을 걸었더니 오류 메시지가 사라졌습니다.
