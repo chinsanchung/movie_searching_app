@@ -1,5 +1,5 @@
-import React, { useState } from "react";
-import styled from "styled-components";
+import React, { useState, useEffect } from "react";
+import styled, { css } from "styled-components";
 import { MdSearch } from "react-icons/md";
 import { Link } from "react-router-dom";
 
@@ -15,7 +15,22 @@ const SectionHeader = styled.div`
     border-top-left-radius: 5px;
     border-top-right-radius: 5px;
 `;
-
+const HomeSpan = styled.span`
+    color: #000;
+    ${props =>
+        props.active &&
+        css`
+            color: #fff;
+        `}
+`;
+const WatchlistSpan = styled.span`
+    color: #000;
+    ${props =>
+        props.active &&
+        css`
+            color: #fff;
+        `}
+`;
 const Form = styled.form`
     position: relative;
     margin-right: 30px;
@@ -30,11 +45,11 @@ const Input = styled.input`
 `;
 const searchIcon = {
     position: "absolute",
-    left: 7,
-    paddingTop: 4,
-    fontSize: 33
+    left: 6,
+    fontSize: 30
 };
 function Header() {
+    const [active, setActive] = useState(true);
     const [value, setValue] = useState("");
     const onChange = e => setValue(e.target.value);
     const onSubmit = e => {
@@ -46,7 +61,15 @@ function Header() {
         window.location.href = "http://localhost:3000/search/" + changedVal;
         setValue("");
     };
-
+    useEffect(() => {
+        const current_url = window.location.href;
+        const url_string = current_url
+            .split("/")
+            .find(element => element === "watchlist");
+        if (url_string === "watchlist") {
+            setActive(active => !active);
+        }
+    }, []);
     return (
         <SectionHeader>
             <div className="menu-group">
@@ -56,12 +79,14 @@ function Header() {
                 <ul className="main-menu toggle">
                     <li>
                         <Link to="/">
-                            <span>Home</span>
+                            <HomeSpan active={active}>Home</HomeSpan>
                         </Link>
                     </li>
                     <li>
                         <Link to="/watchlist">
-                            <span>Watchlist</span>
+                            <WatchlistSpan active={!active}>
+                                Watchlist
+                            </WatchlistSpan>
                         </Link>
                     </li>
                 </ul>
@@ -69,7 +94,7 @@ function Header() {
 
             <div></div>
             <Form onSubmit={onSubmit}>
-                <div>
+                <div style={{ display: "flex", alignItems: "center" }}>
                     <MdSearch style={searchIcon} />
                     <Input type="text" value={value} onChange={onChange} />
                 </div>
