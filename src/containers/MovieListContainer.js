@@ -10,13 +10,16 @@ function MovieListContainer({ match }) {
         state => state.movieReducer.list
     );
     const dispatch = useDispatch();
+
     useEffect(() => {
         dispatch(getMovieListThunk(keywords));
     }, [keywords, dispatch]);
 
     if (!data && error) return <ErrorPage />;
     if (loading && !data) return null;
+    if (data && !loading) return <MovieList data={data} />;
 
-    return <MovieList data={data} />;
+    return <></>;
+    // return <MovieList data={data} />;
 }
 export default MovieListContainer;
