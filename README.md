@@ -21,12 +21,12 @@
 
 1. 메인 Home
 
-<img src="https://github.com/chinsanchung/movie_searching_app/blob/master/src/assets/site_01.png" width="300" />
+<img src="https://github.com/chinsanchung/movie_searching_app/blob/master/src/assets/site_01.png" width="900" />
 
 2. 검색 결과 창
 
-<img src="https://github.com/chinsanchung/movie_searching_app/blob/master/src/assets/site_03.png" width="300" />
+<img src="https://github.com/chinsanchung/movie_searching_app/blob/master/src/assets/site_03.png" width="900" />
 
 3. 영화 페이지 창
 
-<img src="https://github.com/chinsanchung/movie_searching_app/blob/master/src/assets/site_02.png" width="300" />
+<img src="https://github.com/chinsanchung/movie_searching_app/blob/master/src/assets/site_02.png" width="900" />
