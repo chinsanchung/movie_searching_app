@@ -1,4 +1,4 @@
-import styled, { css } from "styled-components";
+import styled, { css, keyframes } from "styled-components";
 
 export const ContainerHome = styled.div`
     position: relative;
@@ -17,6 +17,15 @@ export const ListUl = styled.ul`
     box-sizing: border-box;
 `;
 
+const fadeIn = keyframes`
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+`;
+
 export const Poster = styled.div`
     display: flex;
     width: ${props => props.width};
@@ -27,6 +36,7 @@ export const Poster = styled.div`
     box-sizing: border-box;
     font-size: 30px;
     font-weight: 600;
+    animation: ${fadeIn} 0.5s;
     ${props =>
         props.poster !== "N/A"
             ? css`
@@ -40,5 +50,5 @@ export const Poster = styled.div`
                       text-decoration: none;
                       color: #000000;
                   }
-              `}
+              `};
 `;
