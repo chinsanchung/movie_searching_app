@@ -58,6 +58,11 @@
 
 -   Header 의 메뉴 아이콘: Home, WatchList 의 글자 색을 페이지마다 구분할 수 있도록 만들었습니다.
 
+9. 02/10
+
+-   MovieList 수정: 검색 키워드, 타이틀의 수를 출력하도록 'components/MovieList', 'containers/MovieListContainer.js' 를 수정했습니다.
+-   Poster 애니메이션 추가: fadeIn 애니메이션을 추가했습니다.
+
 ## Error
 
 1. 입력한 키워드로 결과가 나오지 않을 때, ErrorPage 는 정상적으로 출력되지만, 아래의 메시지가 나옵니다. -> 해결
