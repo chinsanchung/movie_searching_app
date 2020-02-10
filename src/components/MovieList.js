@@ -3,8 +3,21 @@ import { ContainerHome } from "../style/styledComponents";
 import Header from "./Header";
 import LoadingSpinner from "../layout/LoadingSpinner";
 import ListLayout from "../layout/ListLayout";
+import styled from "styled-components";
 
-function MovieList({ data }) {
+const ResultLayout = styled.div`
+    margin: 10px;
+    line-height: 1.5;
+    .list-keywords {
+        font-size: 1.2em;
+        font-style: italic;
+    }
+    .list-length {
+        font-size: 0.9em;
+    }
+`;
+
+function MovieList({ data, keywords }) {
     const [spinner, setSpinner] = useState(false);
     useEffect(() => {
         setSpinner(spinner => !spinner);
@@ -22,6 +35,12 @@ function MovieList({ data }) {
             ) : (
                 <ContainerHome>
                     <Header />
+                    <ResultLayout>
+                        <p className="list-keywords">
+                            Search results for "{keywords}"
+                        </p>
+                        <p className="list-length">{data.length} titles</p>
+                    </ResultLayout>
                     <ListLayout data={data} />
                 </ContainerHome>
             )}

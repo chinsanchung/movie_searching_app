@@ -17,7 +17,7 @@ function MovieListContainer({ match }) {
 
     if (!data && error) return <ErrorPage />;
     if (loading && !data) return null;
-    if (data && !loading) return <MovieList data={data} />;
+    if (data && !loading) return <MovieList data={data} keywords={keywords} />;
 
     return <></>;
     // return <MovieList data={data} />;
