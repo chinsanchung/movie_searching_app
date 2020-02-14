@@ -63,6 +63,10 @@
 -   MovieList 수정: 검색 키워드, 타이틀의 수를 출력하도록 'components/MovieList', 'containers/MovieListContainer.js' 를 수정했습니다.
 -   Poster 애니메이션 추가: fadeIn 애니메이션을 추가했습니다.
 
+10. 02/14
+
+-   TypeScript 도입: 프로젝트 전체를 타입스크립트로 변경했습니다.
+
 ## Error
 
 1. 입력한 키워드로 결과가 나오지 않을 때, ErrorPage 는 정상적으로 출력되지만, 아래의 메시지가 나옵니다. -> 해결
