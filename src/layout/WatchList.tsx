@@ -45,33 +45,35 @@ const WatchList = () => {
         }, 1200);
     }, [dispatch]);
 
-    if (loading && !bookmarkList) return <div></div>;
+    if (loading && !bookmarkList) return null;
 
-    return (
-        <>
-            {spinner ? (
-                <LoadingSpinner />
-            ) : (
-                <ContainerHome>
-                    <Header />
-                    <EmptyLayout>
-                        {bookmarkList.length > 0 ? (
-                            <></>
-                        ) : (
-                            <>
-                                <DecorationImage src={image} />
-                                <h1>
-                                    Use the bookmark icon to add movies or TV
-                                    Shows to your WatchList.
-                                </h1>
-                            </>
-                        )}
-                    </EmptyLayout>
-                    <ListLayout list={bookmarkList} />
-                </ContainerHome>
-            )}
-        </>
-    );
+    if (!loading && bookmarkList)
+        return (
+            <>
+                {spinner ? (
+                    <LoadingSpinner />
+                ) : (
+                    <ContainerHome>
+                        <Header />
+                        <EmptyLayout>
+                            {bookmarkList.length > 0 ? (
+                                <></>
+                            ) : (
+                                <>
+                                    <DecorationImage src={image} />
+                                    <h1>
+                                        Use the bookmark icon to add movies or
+                                        TV Shows to your WatchList.
+                                    </h1>
+                                </>
+                            )}
+                        </EmptyLayout>
+                        <ListLayout list={bookmarkList} />
+                    </ContainerHome>
+                )}
+            </>
+        );
+    return <></>;
 };
 
 export default WatchList;
