@@ -59,7 +59,7 @@ const Bookmark = ({ imdbID, poster, title }: PropsType) => {
             }
             return false;
         } catch (error) {
-            alert(error);
+            console.log(error);
         }
     }, [imdbID]);
     const postData = (data: WatchlistItem) => {
