@@ -66,6 +66,7 @@
 10. 02/14
 
 -   TypeScript 도입: 프로젝트 전체를 타입스크립트로 변경했습니다.
+-   JSON Server, 프로젝트 실행 방법 변경: concurrently 를 이용해서 JSON Server 와 프로젝트를 동시에 실행할 수 있도록 만들었습니다. [참고](https://medium.com/@krpeppermint100/react%EC%99%80-express-%EA%B0%9C%EB%B0%9C-%EC%84%A4%EC%A0%95%ED%95%98%EA%B8%B0-concurrently-c22ef870226a) package.json 의 scripts 를 수정했습니다.
 
 ## Error
 
