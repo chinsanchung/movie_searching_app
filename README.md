@@ -7,11 +7,11 @@
 ## 사용 기술
 
 1. Language: HTML, CSS, TypeScript
-1. Tool: create-react-app, styled-components, react-icons, redux, redux-thunk, react-router, Axios, Json Server
+1. Tool: create-react-app, styled-components, react-icons, redux, redux-thunk, react-router, Axios, Json Server, concurrently
 
 ## 실행 방법
 
-프로젝트가 들어있는 폴더 안에서 명령 프롬프트를 열고, `npm install`으로 필요한 도구를 설치합니다. 그리고 `npm start`를 입력해 개발자 모드를 열고, `npx json-server ./data.json --port 4000`을 다른 터미널에 입력해서 Json Server 를 엽니다.
+프로젝트가 들어있는 폴더 안에서 명령 프롬프트를 열고, `npm install`으로 필요한 도구를 설치합니다. 그리고 `npm start`를 입력해 실행합니다.
 
 ## ISSUE
 
