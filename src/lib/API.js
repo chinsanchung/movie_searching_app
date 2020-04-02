@@ -1,9 +1,9 @@
 import axios from "axios";
+import { API_KEY, GENRE_LIST } from "./constant";
 
-const API_KEY = "abf55e994773bfc10c3de30ec5debec6";
-
-export const getMovieList = async query => {
-    const url = `https://api.themoviedb.org/3/search/movie?api_key=${API_KEY}&query=${query}&page=1&include_adult=false`;
+// All: Movie + TV Shows
+export const searchAllData = async query => {
+    const url = ` https://api.themoviedb.org/3/search/multi?api_key=${API_KEY}&query=${query}&include_adult=false`;
     let source = axios.CancelToken.source();
     try {
         const response = await axios.get(url, {
@@ -15,8 +15,8 @@ export const getMovieList = async query => {
         source.cancel();
     }
 };
-
-export const getTVList = async query => {
+// TODO: genre 로 출력하기
+export const getDataFromGenre = async query => {
     const url = `https://api.themoviedb.org/3/search/tv?api_key=${API_KEY}&query=${query}&include_adult=false`;
     let source = axios.CancelToken.source();
     try {
