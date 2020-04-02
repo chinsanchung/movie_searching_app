@@ -6,3 +6,5 @@ export const rootReducer = combineReducers({
     movieReducer,
     bookmarkReducer
 });
+
+export type RootState = ReturnType<typeof rootReducer>;
