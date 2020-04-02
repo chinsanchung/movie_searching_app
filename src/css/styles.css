@@ -1,0 +1,62 @@
+body {
+    /* add background-color */
+    background-color: rgb(50, 50, 50) !important;
+    color: #fff !important;
+}
+
+a {
+    text-decoration: none;
+}
+
+.header-title {
+    color: #fff;
+    font-size: 1.3em;
+    font-weight: 700;
+}
+
+.header-title:hover {
+    color: #e2e2e2;
+}
+
+.toggler-icon {
+    color: #fff;
+}
+
+.header-item {
+    color: #767676;
+}
+
+.header-item:hover {
+    color: #e2e2e2;
+}
+
+.item__active {
+    color: #fff;
+}
+
+.jumbotron {
+    margin-top: 60px;
+    background-repeat: no-repeat;
+    background-position: top;
+    background-size: cover;
+}
+
+/* .jumbotron::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.3);
+} */
+
+.list-layout {
+    overflow-x: scroll;
+}
+
+.list-image {
+    /* max-width: 130px; */
+    max-height: 200px;
+    margin-bottom: 1rem;
+}
