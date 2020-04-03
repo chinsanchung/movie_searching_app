@@ -1,16 +1,15 @@
-import React, { useState } from "react";
-import Header from "./Header";
+import React from "react";
+import Header from "../components/Header";
 import styled from "styled-components";
 import { test_backdrop, test_list } from "../lib/constant";
 import ListLayout from "../layout/ListLayout";
+import { genre_list } from "../lib/genre_list";
 
 const JumboTron = styled.div`
     background-image: url(${props => props.url});
 `;
 
 function MainPage() {
-    const [genre, setGenre] = useState([]);
-
     return (
         <div>
             <Header />
@@ -24,8 +23,12 @@ function MainPage() {
                 </div>
             </JumboTron>
             <div className="container-fluid">
-                <ListLayout list={test_list} />
-                <ListLayout list={test_list} />
+                {genre_list.map(genre => (
+                    <div className="p-2">
+                        <h4 className="font-weight-bold">{genre.name}</h4>
+                        <ListLayout list={test_list} />
+                    </div>
+                ))}
             </div>
         </div>
     );
