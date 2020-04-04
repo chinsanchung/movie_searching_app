@@ -1,17 +1,27 @@
 import React from "react";
 import { Link } from "react-router-dom";
+import ListItem from "../components/ListItem";
 
-function ListLayout({ list }) {
+function ListLayout({ type, list }) {
     return (
         <div className="row d-flex flex-nowrap list-layout">
-            {list.map(item =>
+            {list.map((item, index) => (
+                <ListItem key={index} type={type} item={item} />
+            ))}
+        </div>
+    );
+}
+
+export default ListLayout;
+
+/*
+{list.map(item =>
                 item.poster_path ? (
                     // <Link to={'/content/${item.id}`}>
                     <div className="col-4 col-sm-2 col-md-2 col-lg-2">
                         <div>
                             <img
                                 alt="poster_img"
-                                title={item.title}
                                 src={`https://image.tmdb.org/t/p/w500${item.poster_path}`}
                                 className="img-fluid list-image"
                             />
@@ -23,7 +33,6 @@ function ListLayout({ list }) {
                         <div>
                             <img
                                 alt="related_image"
-                                title={item.media.title}
                                 src={`https://image.tmdb.org/t/p/w500${item.file_path}`}
                                 className="img-fluid list-image"
                             />
@@ -31,8 +40,4 @@ function ListLayout({ list }) {
                     </div>
                 )
             )}
-        </div>
-    );
-}
-
-export default ListLayout;
+*/
