@@ -20,3 +20,12 @@
 -   종류별(사람, 리스트)로 다른 JSON 데이터의 객체 구성에 맞춰 ListLayout의 JSX 에 조건문을 작성
 -   App 에 Person, Content 영역을 Route 로 연결
 -   ContentDetail 페이지 생성
+
+#### 04/04
+
+-   ContentDetail 페이지 디자인, props 데이터를 DOM 요소에 연결
+-   Movie.js에서 상세 페이지에 데한 thunk 함수, 리듀서 제작
+-   API.js 의 요청 함수의 방식을 변경: 한 함수에 통합해서 객체 형태로 반환하도록 변경
+-   ListLayout 에 새로운 props 인 type 를 추가, 데이터의 형식에 맞춰 구분하도록 변경
+-   ContentDetailContainer 에 리덕스 설정
+-   ListLayout 의 하위 요소를 ListItem 컴포넌트로 분리
