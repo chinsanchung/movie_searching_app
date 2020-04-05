@@ -29,3 +29,11 @@
 -   ListLayout 에 새로운 props 인 type 를 추가, 데이터의 형식에 맞춰 구분하도록 변경
 -   ContentDetailContainer 에 리덕스 설정
 -   ListLayout 의 하위 요소를 ListItem 컴포넌트로 분리
+
+#### 04/05
+
+-   ListItem 의 요소에 Link 컴포넌트로 포장, poster_path 에 조건문 추가
+-   ContentDetail 에 loading, error 조건문 추가, recommandations props 삭제
+-   GenreList 에 redux 상태를 보내줄 컨테이너 생성
+-   장르별 영화 목록을 출력하기 위한 searchMoviesFromGenre 함수 추가
+-   장르 목록과 영화 정보 관련 thunk, reducer 구문 추가
