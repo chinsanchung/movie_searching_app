@@ -1,15 +1,33 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import Header from "../components/Header";
 import styled from "styled-components";
-import { test_backdrop, test_list } from "../lib/constant";
-import ListLayout from "../layout/ListLayout";
+import { test_backdrop } from "../lib/constant";
 import { genre_list } from "../lib/genre_list";
+import ListLayout from "../layout/ListLayout";
+import axios from "axios";
+import GenreListContainer from "../containers/GenreListContainer";
 
 const JumboTron = styled.div`
-    background-image: url(${props => props.url});
+    background-image: url(${(props) => props.url});
 `;
 
 function MainPage() {
+    const [loading, setLoading] = useState(true);
+    const getRecomm = () => {
+        // PROBLEM: network 상에는 200으로 제대로 뜨는데 왜 여기서는 undefined?
+        axios
+            .get(
+                "https://api.themoviedb.org/3/movie/76341/recommendations?api_key=abf55e994773bfc10c3de30ec5debec6&page=1"
+            )
+            .then((response) => response.data.results)
+            .catch((error) => console.log(error));
+    };
+    useEffect(() => {
+        setTimeout(() => {
+            setLoading(false);
+        }, 2000);
+    }, []);
+    if (loading) return <div>LOADING</div>;
     return (
         <div>
             <Header />
@@ -23,10 +41,11 @@ function MainPage() {
                 </div>
             </JumboTron>
             <div className="container-fluid">
-                {genre_list.map(genre => (
+                {/* TODO: 스크롤마다 추가하는 방식이 필요할듯 */}
+                {genre_list.slice(0, 2).map((genre) => (
                     <div className="p-2">
                         <h4 className="font-weight-bold">{genre.name}</h4>
-                        <ListLayout list={test_list} />
+                        <GenreListContainer id={genre.id} />
                     </div>
                 ))}
             </div>
