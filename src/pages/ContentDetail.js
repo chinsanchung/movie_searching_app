@@ -1,11 +1,13 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import Header from "../components/Header";
 import ListLayout from "../layout/ListLayout";
 import { runtime_change } from "../lib/functions";
+import { FaRegCalendar } from "react-icons/fa";
+import { IoIosTimer } from "react-icons/io";
 import styled from "styled-components";
 
 const Backdrop = styled.div`
-    background-image: url(${props => props.url});
+    background-image: url(${(props) => props.url});
     background-repeat: no-repeat;
     background-position: top left;
     background-size: cover;
@@ -20,7 +22,9 @@ const Backdrop = styled.div`
     }
 `;
 
-function ContentDetail({ detail, images, credits, recommandations, videos }) {
+function ContentDetail({ detail, images, credits, videos }) {
+    const [media, setMedia] = useState("images");
+    useEffect(() => console.log("content"), []);
     return (
         <div>
             <Header />
@@ -43,7 +47,7 @@ function ContentDetail({ detail, images, credits, recommandations, videos }) {
                         <img
                             src={`https://image.tmdb.org/t/p/w500/${detail.poster_path}`}
                             alt={detail.original_title}
-                            className="img-thumbnail"
+                            className="img-thumbnail content-poster"
                         />
                     </div>
                     <div className="col-12 col-sm">
@@ -59,11 +63,10 @@ function ContentDetail({ detail, images, credits, recommandations, videos }) {
                                     </a>
                                 ))}
                             </p>
-                            <p>
-                                {`${detail.release_date} ${runtime_change(
-                                    detail.runtime
-                                )}`}
-                            </p>
+                            <div className="mb-3">
+                                <FaRegCalendar /> {detail.release_date} (US){" "}
+                                <IoIosTimer /> {runtime_change(detail.runtime)}
+                            </div>
                         </div>
                         <div>
                             <h5 className="font-weight-bold">Overview</h5>
@@ -71,15 +74,71 @@ function ContentDetail({ detail, images, credits, recommandations, videos }) {
                         </div>
                         <div>
                             <h5 className="font-weight-bold">Main Cast</h5>
-                            {/* TODO: LISTLAYOUT JSON별로 따로 만들기 */}
-                            <ListLayout type="profile" list={credits} />
+                            <ListLayout
+                                type="profile"
+                                list={credits.slice(0, 12)}
+                            />
                         </div>
                     </div>
                 </div>
                 <div className="row mt-3">
                     <div className="col-12">
-                        <h5 className="font-weight-bold">Images</h5>
-                        {/* <ListLayout list={} /> */}
+                        <div className="row">
+                            <div className="col-1 mr-3">
+                                <h4>Media</h4>
+                            </div>
+                            <div
+                                className="col-2 font-weight-bold media--li"
+                                onClick={() => setMedia("images")}
+                            >
+                                Images {images.backdrops.length}
+                            </div>
+                            <div
+                                className="col-2 font-weight-bold media--li"
+                                onClick={() => setMedia("posters")}
+                            >
+                                Posters {images.posters.length}
+                            </div>
+                            <div
+                                className="col-2 font-weight-bold media--li"
+                                onClick={() => setMedia("videos")}
+                            >
+                                Videos {videos.length}
+                            </div>
+                        </div>
+                        {(() => {
+                            switch (media) {
+                                case "images":
+                                    return (
+                                        <ListLayout
+                                            type="file"
+                                            list={images.backdrops}
+                                        />
+                                    );
+                                case "posters":
+                                    return (
+                                        <ListLayout
+                                            type="file"
+                                            list={images.posters}
+                                        />
+                                    );
+                                case "videos":
+                                    return (
+                                        <ListLayout
+                                            type="video"
+                                            list={videos}
+                                        />
+                                    );
+                                default:
+                                    return null;
+                            }
+                        })()}
+                        <div className="row mt-3">
+                            <h5 className="font-weight-bold">
+                                Recommandations
+                            </h5>
+                            {/* <ListLayout type="poster" list={recommandations} /> */}
+                        </div>
                     </div>
                 </div>
             </Backdrop>
