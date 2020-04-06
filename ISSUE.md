@@ -37,3 +37,8 @@
 -   GenreList 에 redux 상태를 보내줄 컨테이너 생성
 -   장르별 영화 목록을 출력하기 위한 searchMoviesFromGenre 함수 추가
 -   장르 목록과 영화 정보 관련 thunk, reducer 구문 추가
+
+#### 04/06
+
+-   API 함수(searchPersonDetail)를 수정해 인물 데이터를 불러와 리덕스에 저장하고, PersonDetail 에 컨테이너 연결, 페이지 디자인, 출력
+-   ContentDetail, PersonDetail 에 대한 styles.css 수정
