@@ -57,6 +57,29 @@ a {
 
 .list-image {
     /* max-width: 130px; */
-    max-height: 200px;
+    max-height: 150px;
     margin-bottom: 1rem;
+}
+
+/* content-detail */
+.media--li {
+    cursor: pointer;
+}
+
+.content-poster {
+    max-width: 200px;
+}
+
+/* person-detail */
+.filmo-text {
+    display: inline-block;
+    color: #000;
+}
+
+.list-group-item {
+    padding: 0.75rem 0.25rem;
+}
+
+.filmo-text.text--year {
+    border-right: 1px solid #767676;
 }
