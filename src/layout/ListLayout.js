@@ -3,7 +3,7 @@ import ListItem from "../components/ListItem";
 
 function ListLayout({ type, list }) {
     return (
-        <div className="row d-flex flex-nowrap list-layout">
+        <div className="row d-flex flex-nowrap mt-3 list-layout">
             {list.map((item, index) => (
                 <ListItem key={item.id} type={type} item={item} />
             ))}
