@@ -1,5 +1,5 @@
 import axios from "axios";
-import { API_KEY, GENRE_LIST } from "./constant";
+import { API_KEY } from "./constant";
 
 const getRequetsedData = async (url) => {
     try {
@@ -17,6 +17,25 @@ export const searchAllData = async (query) => {
     return response;
 };
 
+export const searchPersonDetail = async (id) => {
+    const detail_url = ` https://api.themoviedb.org/3/person/${id}?api_key=${API_KEY}&language=en-US`;
+    const filmo_url = `https://api.themoviedb.org/3/person/${id}/movie_credits?api_key=${API_KEY}`;
+    const image_url = ` https://api.themoviedb.org/3/person/${id}/images?api_key=${API_KEY}`;
+    const tagged_url = ` https://api.themoviedb.org/3/person/${id}/tagged_images?api_key=${API_KEY}&language=en-US&page=1`;
+
+    const detail_response = await getRequetsedData(detail_url);
+    const filmo_response = await getRequetsedData(filmo_url);
+    const image_response = await getRequetsedData(image_url);
+    const tagged_response = await getRequetsedData(tagged_url);
+
+    return {
+        detail: detail_response,
+        filmography: filmo_response.cast,
+        images: image_response.profiles,
+        tagged_images: tagged_response.results,
+    };
+};
+
 // axios.all: https://www.storyblok.com/tp/how-to-send-multiple-requests-using-axios
 // url 출처: https://www.themoviedb.org/talk/59fcec1fc3a368689300071d?language=ko-KR
 export const searchMoviesFromGenre = async (id) => {
@@ -25,11 +44,6 @@ export const searchMoviesFromGenre = async (id) => {
     return response;
 };
 
-export const searchPersonDetail = async (id) => {
-    const filmo_url = `https://api.themoviedb.org/3/person/${id}/movie_credits?api_key=${API_KEY}`;
-    const image_url = ` https://api.themoviedb.org/3/person/${id}/images?api_key=${API_KEY}`;
-    return { filmo_url, image_url };
-};
 export const searchMovieRecoommands = async (id) => {
     const url = `https://api.themoviedb.org/3/movie/${id}/recommendations?api_key=${API_KEY}&page=1`;
     try {
