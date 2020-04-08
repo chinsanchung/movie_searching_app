@@ -1,12 +1,13 @@
 import React, { useEffect, useState } from "react";
-import { Link } from "react-router-dom";
 import Header from "../components/Header";
 import ListLayout from "../layout/ListLayout";
+import PropTypes from "prop-types";
+import Filmography from "../layout/Filmography";
 
 function PersonDetail({ detail, filmography, images, tagged_images }) {
     const biography = detail.biography.split("\n")[0];
     const [image_status, setStatus] = useState(true);
-    const [sorted_filmo, setFilmo] = useState(null);
+    const [sortedFilmo, setFilmo] = useState(null);
 
     useEffect(() => {
         const descFilmo = () => {
@@ -21,10 +22,9 @@ function PersonDetail({ detail, filmography, images, tagged_images }) {
             setFilmo(result);
         };
         descFilmo();
-    }, []);
+    }, [filmography]);
 
-    if (!sorted_filmo) return null;
-
+    if (!sortedFilmo) return null;
     return (
         <div>
             <Header />
@@ -64,40 +64,7 @@ function PersonDetail({ detail, filmography, images, tagged_images }) {
                                     Filmography
                                 </h5>
                             </div>
-                            <ul className="list-group">
-                                {sorted_filmo.map(
-                                    (item) =>
-                                        item.release_date !== "" && (
-                                            <li
-                                                key={item.id}
-                                                className="list-group-item"
-                                            >
-                                                <div className="col-2 filmo-text text--year">
-                                                    {
-                                                        item.release_date.split(
-                                                            "-"
-                                                        )[0]
-                                                    }
-                                                </div>
-                                                <Link
-                                                    to={`/content/${item.id}`}
-                                                    className="col-9 filmo-text"
-                                                >
-                                                    {item.title}{" "}
-                                                    <i
-                                                        style={{
-                                                            color:
-                                                                "rgba(0, 0, 0, 0.5)",
-                                                        }}
-                                                    >
-                                                        as
-                                                    </i>{" "}
-                                                    {item.character}
-                                                </Link>
-                                            </li>
-                                        )
-                                )}
-                            </ul>
+                            <Filmography filmography={sortedFilmo} />
                         </div>
                     </div>
                 </div>
@@ -118,10 +85,8 @@ function PersonDetail({ detail, filmography, images, tagged_images }) {
                             </div>
                         </div>
                         {image_status ? (
-                            // images
                             <ListLayout type="file" list={images} />
                         ) : (
-                            // tagged images
                             <ListLayout type="file" list={tagged_images} />
                         )}
                     </div>
