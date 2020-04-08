@@ -41,16 +41,6 @@ a {
     background-size: cover;
 }
 
-/* .jumbotron::before {
-    content: "";
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: rgba(0, 0, 0, 0.3);
-} */
-
 .list-layout {
     overflow-x: scroll;
 }
@@ -62,8 +52,14 @@ a {
 }
 
 /* content-detail */
+.media--title {
+    margin-right: 2em;
+    font-size: 1.25em;
+}
+
 .media--li {
     cursor: pointer;
+    font-size: 1.25em;
 }
 
 .content-poster {
@@ -71,15 +67,14 @@ a {
 }
 
 /* person-detail */
-.filmo-text {
+.filmography-text {
     display: inline-block;
     color: #000;
+}
+.filmography-text:hover {
+    text-decoration: none;
 }
 
 .list-group-item {
     padding: 0.75rem 0.25rem;
-}
-
-.filmo-text.text--year {
-    border-right: 1px solid #767676;
 }
